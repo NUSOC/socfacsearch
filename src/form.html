@@ -1,0 +1,45 @@
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+
+<div x-data="socfacsearch()">
+	<input type="text" name="facsearch" @input="doSearch" x-model="searchTerm">
+
+	<p>Result count: <span x-text="results.length"></span></p>
+
+
+	<div class="socfacultysearchResultsContainer">
+		<template x-for="(item, index) in results" :key="index">
+
+			<div>
+				<!-- You can also reference "index" inside the iteration if you need. -->
+				<br><a x-bind:href="item.url" x-text="item.name"></a>
+			</div>
+		</template>
+	</div>
+</div>
+
+
+<script type="application/javascript">
+	let socfacsearch = () => {
+		return {
+			searchTerm: "",
+			results: [],
+			doSearch() {
+				//console.log(this.searchTerm);
+
+				// if length under 2, don't process and reset results
+				if (this.searchTerm.length < 2) {
+					this.results = [];
+					return
+				}
+
+				this.results = window.faculty.filter((item) => {
+					return item.name.toUpperCase().includes(this.searchTerm.toUpperCase());
+				})
+
+
+			},
+
+		}
+	}
+</script>
