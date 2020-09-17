@@ -79,14 +79,7 @@ class SoCFacultySearch
 	{
 		$payload = json_encode($this->data);
 
-		$out = <<<HEREDOC
-        // Here is the data he used for faculty search TEST
-        var faculty = $payload;
-
-
-        console.log(faculty);
-
-     HEREDOC;
+		$out ="var faculty = $payload;";
 
 		echo sprintf("<script>%s</script>", $out);
 
