@@ -2,7 +2,7 @@
 /**
  * Plugin Name:     SoC Faculty Search
  * Plugin URI:      PLUGIN SITE HERE
- * Description:     A plug-in using shortcodes creates a text search box to search faculty members. Will use Alpine.js
+ * Description:     A plug-in using shortcode [socfacsearch] creates a text search box to search faculty members. Will use Alpine.js
  * Author:
  * Author URI:
  * Text Domain:     socfacsearch
