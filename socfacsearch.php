@@ -39,37 +39,21 @@ class SoCFacultySearch
 	public function doSearch()
 	{
 
-		// query faculty
-		$query = new WP_Query([
+
+		$r = get_posts([
+			'posts_per_page' => 1000,
 			'post_type' => 'faculty',
-			'post_status' => 'publish',
-			'orderby' => 'title',
-			'order' => 'ASC',
+			"post_status" => "publish",
+			'order' => 'asc',
+			'orderby' => 'post_title',
 		]);
 
-		// Check that we have query results.
-		if ($query->have_posts()) {
-
-			$data = [];
-
-			// Start looping over the query results.
-			while ($query->have_posts()) {
-
-				$query->the_post();
-
-				$data[] = [
-					'name' => get_the_title(),
-					'url' => get_post_permalink(),
-				];
-
-				// Contents of the queried post results go here.
-
-			}
-
+		foreach ($r as $i) {
+			$data[] = [
+				'name' => $i->post_title,
+				'url' => $i->guid,
+			];
 		}
-
-		// Restore original post data.
-		wp_reset_postdata();
 
 		//return data
 		$this->data = $data;
@@ -80,6 +64,7 @@ class SoCFacultySearch
 		$payload = json_encode($this->data);
 
 		$out ="var faculty = $payload;";
+		$out .= "console.log('number of faculty in memory:' + faculty.length);";
 
 		echo sprintf("<script>%s</script>", $out);
 
