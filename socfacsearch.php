@@ -41,7 +41,7 @@ class SoCFacultySearch
 
 
 		$r = get_posts([
-			'posts_per_page' => 1000,
+			'posts_per_page' => -1,
 			'post_type' => 'faculty',
 			"post_status" => "publish",
 			'order' => 'asc',
