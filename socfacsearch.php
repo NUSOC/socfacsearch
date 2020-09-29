@@ -67,7 +67,7 @@ class SoCFacultySearch
 			$data[] = [
 				'name' => $i->post_title,
 				'url' => $path,
-				'guid' => $i->guid,
+				'guid' => '?p=' . $i->ID,
 			];
 		}
 
