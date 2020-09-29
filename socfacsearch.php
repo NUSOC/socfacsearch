@@ -49,9 +49,25 @@ class SoCFacultySearch
 		]);
 
 		foreach ($r as $i) {
+			
+			// parse out the path only to work with multisite
+			$parsed = parse_url($i->guid);
+			$path = $parsed['path'];
+		
+			// if root path, skip
+			if ($path == '/') {
+				// $issue[] = [
+				// 	'name' => $i->post_title,
+				// 	'url' => $path,
+				// 	'guid' => $i->guid,
+				// ];
+				continue;
+			}
+		
 			$data[] = [
 				'name' => $i->post_title,
-				'url' => $i->guid,
+				'url' => $path,
+				'guid' => $i->guid,
 			];
 		}
 
@@ -65,6 +81,7 @@ class SoCFacultySearch
 
 		$out ="var faculty = $payload;";
 		$out .= "console.log('number of faculty in memory:' + faculty.length);";
+		$out .= "console.dir(faculty);";
 
 		echo sprintf("<script>%s</script>", $out);
 
