@@ -2,7 +2,8 @@
 
 
 <div x-data="socfacsearch()">
-	<input type="text" name="facsearch" @input="doSearch" x-model="searchTerm">
+	<label for="facsearch" class="hide-label">Faculty Search:</label>
+	<input type="text" id="facsearch" name="facsearch" @input="doSearch" x-model="searchTerm">
 
 	<p>Result count: <span x-text="results.length"></span></p>
 
